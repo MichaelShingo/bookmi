@@ -1,39 +1,29 @@
 const express = require('express')
 const Gig = require('../models/gigModel')
+const {
+    createGig,
+    getGig,
+    getGigs,
+    deleteGig,
+    updateGig
+    
+} = require('../controllers/gigController')
 
 const router = express.Router()
 
 //GET all gigs
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all gigs'})
-
-})
+router.get('/', getGigs)
 
 //GET single gig
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single gig'})
-})
+router.get('/:id', getGig)
 
 // POST (create a new gig)
-router.post('/', async (req, res) => {
-    const {name, proID, clientID, dateTime, location, details, contractID} = req.body
-    try {
-        const workout = await Gig.create({name, proID, clientID, dateTime, location, details, contractID})
-        res.status(200).json(workout)
-    } catch (err) {
-        res.status(400).json({error: err.message})
-    }
-})
+router.post('/', createGig)
 
 //DELETE a gig
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a gig'})
-})
+router.delete('/:id', deleteGig)
 
 // UPDATE a gig
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a gig'})
-})
-
+router.patch('/:id', updateGig)
 
 module.exports = router
