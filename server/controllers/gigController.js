@@ -32,6 +32,14 @@ const getGig = async (req, res) => {
 const createGig = async (req, res) => {
     const {name, proID, clientID, dateTime, location, details, contractID} = req.body
 
+    let emptyFields = []
+
+    if (!name) {
+        emptyFields.push('title')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in all the fields.', emptyFields})
+    }
     // add doc to DB
     try {
         const gig = await Gig.create({name, proID, clientID, dateTime, location, details, contractID})
