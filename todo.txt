@@ -1,0 +1,7 @@
+CREATE A DEDICATED PAGE FOR DISPLAYING ALL GIG DETAILS (for pros) 
+    from here you can select update and delete options
+UPDATE FUNCTION
+
+format date 
+create update function
+create dynamic page when clicking on the event 

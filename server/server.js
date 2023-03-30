@@ -1,5 +1,6 @@
 const express = require('express')
 const gigRoutes = require('./routes/gigs')
+const addressRoutes = require('./routes/addresses')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
@@ -29,7 +30,9 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(() => {
         console.log(error)
     })
+    
 // routes
 app.use('/api/gigs', gigRoutes) //attaches all routes to the app
 //same as saying app.get, but now the get routes in gigRoutes is attached to app
+app.use('/api/address', addressRoutes)
 

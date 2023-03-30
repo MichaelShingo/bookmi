@@ -8,22 +8,50 @@ const GigForm = () => {
     const [dateTime, setDateTime] = useState(DEFAULT_DATE) //Date.now()
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
-    const [zip, setZip] = useState('')
+    const [state, setState] = useState('')
+    const [zipcode, setZip] = useState('')
     const [details, setDetails] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        //create the address first, return the _id of the address from the api
+        //save the address._id with the gig const 
+
+        const address = {
+            street,
+            city,
+            state,
+            zipcode
+        }
+
+        const addressResponse = await fetch('/api/address', {
+            method: 'POST',
+            body: JSON.stringify(address),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const addressJson = await addressResponse.json()
+        const location = addressJson._id
+        console.log(location)
+
+        if (!addressResponse.ok) {
+            setError(addressJson.error)
+        }
+
+        //save address id here 
         const gig = {
             name,
             dateTime,
-            city,
-            zip,
-            details
+            location,
+            details,
         }
 
-        const response = await fetch('/api/gigs', { //must add address somehow!
+        const response = await fetch('/api/gigs', { 
             method: 'POST',
             body: JSON.stringify(gig), // you need to change this into a JSON string
             headers: {
@@ -41,6 +69,7 @@ const GigForm = () => {
             setDateTime(DEFAULT_DATE)
             setStreet('')
             setCity('')
+            setState('')
             setZip('')
             setDetails('')
             setError(null)
@@ -78,11 +107,19 @@ const GigForm = () => {
                 type="text"
                 onChange={(e) => setCity(e.target.value)}
                 value={city}
+                placeholder="City"
+            />
+            <input
+                type="text"
+                onChange={(e) => setState(e.target.value)}
+                value={state}
+                placeholder="State"
             />
             <input
                 type="text"
                 onChange={(e) => setZip(e.target.value)}
-                value={zip}
+                value={zipcode}
+                placeholder="Zip"
             />
             <label>Details</label>
             <input

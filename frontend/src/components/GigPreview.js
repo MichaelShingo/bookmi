@@ -4,7 +4,9 @@ import { useGigsContext } from "../hooks/useGigsContext"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const GigDetails = ({ gig }) => {
-    const { dispatch } = useGigsContext()
+    const { dispatch } = useGigsContext() //get gig info
+
+    //const address = await gig.address
 
     const handleClick = async () => {
         const response = await fetch('/api/gigs/' + gig._id, {
@@ -17,14 +19,19 @@ const GigDetails = ({ gig }) => {
         }
 
     }
+
+    const handleUpdate = async () => {
+        //route to gig update page
+    }
     return (
         <div className="gig-details">
             <h4>{gig.name}</h4>
             <p>Date: {gig.dateTime}</p>
             <p>{formatDistanceToNow(new Date(gig.dateTime), { addSuffix: true })}</p>
-            <p>Location: {gig.location}</p>
+            <p>Location:</p>
             <p>Client: {gig.clientID}</p>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+            <span className="material-symbols-outlined" onClick={handleUpdate}>edit</span>
         </div>
     )
 }

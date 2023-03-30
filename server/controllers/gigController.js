@@ -1,4 +1,5 @@
 const Gig = require('../models/gigModel')
+
 const mongoose = require('mongoose')
 
 // get all gigs
@@ -37,6 +38,18 @@ const createGig = async (req, res) => {
     if (!name) {
         emptyFields.push('title')
     }
+    // if (!street) {
+    //     emptyFields.push('street')
+    // }
+    // if (!city) {
+    //     emptyFields.push('city')
+    // }
+    // if (!state) {
+    //     emptyFields.push('state')
+    // }
+    // if (!zipcode) {
+    //   //  emptyFields.push('zipcode')
+    // }
     if (emptyFields.length > 0) {
         return res.status(400).json({error: 'Please fill in all the fields.', emptyFields})
     }
