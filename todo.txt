@@ -1,6 +1,5 @@
-CREATE A DEDICATED PAGE FOR DISPLAYING ALL GIG DETAILS (for pros) 
-    from here you can select update and delete options
-UPDATE FUNCTION
+Add amount field 
+UPDATE FUNCTION on GigDetails page
 
 format date 
 create update function

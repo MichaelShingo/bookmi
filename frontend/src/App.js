@@ -1,9 +1,9 @@
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 
 // pages and components
 import Gigs from './pages/Gigs'
+import GigDetails from './pages/GigDetails'
 
 function App() {
   return (
@@ -15,6 +15,10 @@ function App() {
             <Route
               path="/"
               element={<Gigs />}
+            />
+            <Route 
+              path="/gigdetails/:gigId"
+              element={<GigDetails />}
             />
           </Routes>
         </div>

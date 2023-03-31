@@ -1,9 +1,9 @@
 import { useGigsContext } from "../hooks/useGigsContext"
-
+import { Link } from 'react-router-dom'
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const GigDetails = ({ gig }) => {
+const GigPreview = ({ gig }) => {
     const { dispatch } = useGigsContext() //get gig info
 
     //const address = await gig.address
@@ -24,16 +24,18 @@ const GigDetails = ({ gig }) => {
         //route to gig update page
     }
     return (
-        <div className="gig-details">
-            <h4>{gig.name}</h4>
-            <p>Date: {gig.dateTime}</p>
-            <p>{formatDistanceToNow(new Date(gig.dateTime), { addSuffix: true })}</p>
-            <p>Location:</p>
-            <p>Client: {gig.clientID}</p>
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
-            <span className="material-symbols-outlined" onClick={handleUpdate}>edit</span>
-        </div>
+        <Link to={`/gigdetails/${gig._id}`}>
+            <div className="gig-details">
+                <h4>{gig.name}</h4>
+                <p>Date: {gig.dateTime}</p>
+                <p>{formatDistanceToNow(new Date(gig.dateTime), { addSuffix: true })}</p>
+                <p>Location:</p>
+                <p>Client: {gig.clientID}</p>
+                <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+                <span className="material-symbols-outlined" onClick={handleUpdate}>edit</span>
+            </div>
+        </Link>
     )
 }
 
-export default GigDetails
+export default GigPreview

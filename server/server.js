@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
         })
     })
     .catch(() => {
-        console.log(error)
+        console.log('error')
     })
     
 // routes
